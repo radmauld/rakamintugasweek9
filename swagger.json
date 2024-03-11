@@ -1,0 +1,204 @@
+export const swaggerDoc = {
+    openapi: "8.11.3",
+      version: "1.0.0",
+    },
+    servers: [
+      {
+        url: "http://localhost:300",
+      },
+    ],
+    tags: [
+      {
+        name: "Authentication",
+        description: "Endpoints for user authentication",
+      },
+      {
+        name: "Movies",
+        description: "Endpoints for managing movies",
+      },
+      {
+        name: "Users",
+        description: "Endpoints for managing users",
+      },
+    ],
+    paths: {
+      "/api/users/me": {
+        get: {
+          tags: ["Authentication"],
+          summary: "Get current user",
+          responses: {
+            200: {
+              description: "Successful operation",
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/User",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      "/api/users/login": {
+        post: {
+          tags: ["Authentication"],
+          summary: "Login user",
+          requestBody: {
+            required: true,
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/LoginRequest",
+                },
+              },
+            },
+          },
+          responses: {
+            200: {
+              description: "Successful operation",
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/LoginResponse",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      "/api/users/logout": {
+        delete: {
+          tags: ["Authentication"],
+          summary: "Logout user",
+          responses: {
+            200: {
+              description: "Successful operation",
+            },
+          },
+        },
+      },
+      "/api/movies": {
+        get: {
+          tags: ["Movies"],
+          summary: "Get all movies",
+          responses: {
+            200: {
+              description: "Successful operation",
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "array",
+                    items: {
+                      $ref: "#/components/schemas/Movie",
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        post: {
+          tags: ["Movies"],
+          summary: "Create a new movie",
+          requestBody: {
+            required: true,
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/Movie",
+                },
+              },
+            },
+          },
+          responses: {
+            200: {
+              description: "Successful operation",
+            },
+          },
+        },
+      },
+      "/api/movies/{id}": {
+        get: {
+          tags: ["Movies"],
+          summary: "Get movie by ID",
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              description: "ID of the movie to retrieve",
+              required: true,
+              schema: {
+                type: "string",
+              },
+            },
+          ],
+          responses: {
+            200: {
+              description: "Successful operation",
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/Movie",
+                  },
+                },
+              },
+            },
+          },
+        },
+        put: {
+          tags: ["Movies"],
+          summary: "Update movie",
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              description: "ID of the movie to update",
+              required: true,
+              schema: {
+                type: "string",
+              },
+            },
+          ],
+          requestBody: {
+            required: true,
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/Movie",
+                },
+              },
+            },
+          },
+          responses: {
+            200: {
+              description: "Successful operation",
+            },
+          },
+        },
+        delete: {
+          tags: ["Movies"],
+          summary: "Delete movie",
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              description: "ID of the movie to delete",
+              required: true,
+              schema: {
+                type: "string",
+              },
+            },
+          ],
+          responses: {
+            200: {
+              description: "Successful operation",
+            },
+          },
+        },
+      },
+      
+},
+
+  export default swaggerDoc;
